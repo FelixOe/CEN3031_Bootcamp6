@@ -104,8 +104,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
             Listings.delete(id)
                 .then(function (response) {
                     $scope.loading = false;
-                    $location.path('/listings');
-                    $scope.$apply();
+                    $state.go('listings.list', {successMessage: 'Listing successfully deleted!'});
                 }, function (error) {
                     $scope.error = 'Unable to delete listing with id "' + id + '"\n' + error;
                     $scope.loading = false;
