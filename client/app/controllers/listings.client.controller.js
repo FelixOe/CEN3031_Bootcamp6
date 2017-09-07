@@ -15,21 +15,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
     };
 
     $scope.findOne = function() {
-      debugger;
       $scope.loading = true;
-
-      /*
-        Take a look at 'list-listings.client.view', and find the ui-sref attribute that switches the state to the view 
-        for a single listing. Take note of how the state is switched: 
-
-          ui-sref="listings.view({ listingId: listing._id })"
-
-        Passing in a parameter to the state allows us to access specific properties in the controller.
-
-        Now take a look at 'view-listing.client.view'. The view is initialized by calling "findOne()". 
-        $stateParams holds all the parameters passed to the state, so we are able to access the id for the 
-        specific listing we want to find in order to display it to the user. 
-       */
 
       var id = $stateParams.listingId;
 
@@ -37,7 +23,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
               .then(function(response) {
                 $scope.listing = response.data;
                 $scope.loading = false;
-              }, function(error) {  
+              }, function(error) {
                 $scope.error = 'Unable to retrieve listing with id "' + id + '"\n' + error;
                 $scope.loading = false;
               });
@@ -79,6 +65,31 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
         successfully finished, navigate back to the 'listing.list' state using $state.go(). If an error 
         occurs, pass it to $scope.error. 
        */
+        $scope.error = null;
+
+        if (!isValid) {
+            $scope.$broadcast('show-errors-check-validity', 'articleForm');
+
+            return false;
+        }
+
+        var listing = {
+            name: $scope.listing.name,
+            code: $scope.listing.code,
+            address: $scope.listing.address
+        };
+
+        var id = $stateParams.listingId;
+
+        /* Save the article using the Listings factory */
+        Listings.update(id, listing)
+            .then(function(response) {
+                //if the object is successfully saved redirect back to the list page
+                $state.go('listings.list', { successMessage: 'Listing succesfully updated!' });
+            }, function(error) {
+                //otherwise display the error
+                $scope.error = 'Unable to save listing!\n' + error;
+            });
     };
 
     $scope.remove = function() {
@@ -86,6 +97,19 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
         Implement the remove function. If the removal is successful, navigate back to 'listing.list'. Otherwise, 
         display the error. 
        */
+        $scope.loading = true;
+
+        var id = $stateParams.listingId;
+
+        Listings.delete(id)
+            .then(function(response) {
+                $scope.loading = false;
+                $location.path('/listings');
+                $scope.$apply();
+            }, function(error) {
+                $scope.error = 'Unable to delete listing with id "' + id + '"\n' + error;
+                $scope.loading = false;
+            });
     };
 
     /* Bind the success message to the scope if it exists as part of the current state */

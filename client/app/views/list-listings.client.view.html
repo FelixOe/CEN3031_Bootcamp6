@@ -30,12 +30,6 @@
           <th>Building Name</th>
           <th></th>
         </tr>
-        <!-- 
-          The ui-sref attribute is used by Angular UI Router to switch the state to an individual listing, 
-          as specified in 'config/listings.client.routes.js'. The listing id is passed in as a parameter. 
-          When a user clicks on a table row, the view will display a single listing and the state change will be
-          reflected in the browser's URL. 
-          -->
         <tr ng-repeat="listing in listings | filter: query" ui-sref="listings.view({ listingId: listing._id })">
           <td>{{listing.code}}</td>
           <td>{{listing.name}}</td>
