@@ -5,13 +5,17 @@ angular.module('listings', []);
 var app = angular.module('directoryApp', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps', 'listings']);
 
 /* application configuration */
-app.config(['$urlRouterProvider', '$locationProvider',
-  function($urlRouterProvider, $locationProvider) {
+app.config(['$urlRouterProvider', '$locationProvider', 'uiGmapGoogleMapApiProvider',
+  function($urlRouterProvider, $locationProvider, GoogleMapApi) {
     /* https://docs.angularjs.org/api/ng/provider/$locationProvider */
     $locationProvider.html5Mode(true);
 
     /* go to the '/listings' URL if an invalid route is provided */
     $urlRouterProvider.otherwise('/listings');
+
+    GoogleMapApi.configure({
+        key: 'AIzaSyBrGmd73N_Ve9G7Q5SjpG8AJrOSqgGcHP4 '
+    });
   }
 ]);
 
