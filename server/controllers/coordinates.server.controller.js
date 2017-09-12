@@ -3,7 +3,7 @@ var request = require('request');
 module.exports = function(req, res, next) {
   if(req.body.address) {
     var options = {
-      key: '',
+      key: process.env.GMAP,
       address: req.body.address
     }
     request({
