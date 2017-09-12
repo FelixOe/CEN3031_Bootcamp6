@@ -14,7 +14,7 @@ app.config(['$urlRouterProvider', '$locationProvider', 'uiGmapGoogleMapApiProvid
     $urlRouterProvider.otherwise('/listings');
 
     GoogleMapApi.configure({
-        key: 'AIzaSyBrGmd73N_Ve9G7Q5SjpG8AJrOSqgGcHP4 '
+        key: 'AIzaSyDRi_pE78hIn4wwXpK0FTC19phDEauyDe4'
     });
   }
 ]);
