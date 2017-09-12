@@ -5,7 +5,7 @@ angular.module('listings', []);
 var app = angular.module('directoryApp', ['ui.router', 'ui.bootstrap', 'uiGmapgoogle-maps', 'listings']);
 
 /* application configuration */
-app.config(['$urlRouterProvider', '$locationProvider', 'uiGmapGoogleMapApiProvider',
+app.config(['$urlRouterProvider', '$locationProvider',
   function($urlRouterProvider, $locationProvider, GoogleMapApi) {
     /* https://docs.angularjs.org/api/ng/provider/$locationProvider */
     $locationProvider.html5Mode(true);
@@ -13,11 +13,11 @@ app.config(['$urlRouterProvider', '$locationProvider', 'uiGmapGoogleMapApiProvid
     /* go to the '/listings' URL if an invalid route is provided */
     $urlRouterProvider.otherwise('/listings');
 
-    GoogleMapApi.configure({
-        key: 'AIzaSyDRi_pE78hIn4wwXpK0FTC19phDEauyDe4',
-        v: '3.17',
-        libraries: 'weather, geometry, visualization'
-    });
+    // GoogleMapApi.configure({
+    //     key: 'AIzaSyDRi_pE78hIn4wwXpK0FTC19phDEauyDe4',
+    //     v: '3.17',
+    //     libraries: 'weather, geometry, visualization'
+    // });
   }
 ]);
 
