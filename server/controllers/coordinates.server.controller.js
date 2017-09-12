@@ -1,10 +1,9 @@
-var config = require('../config/config'), 
-    request = require('request');
+var request = require('request');
 
 module.exports = function(req, res, next) {
   if(req.body.address) {
     var options = {
-      key: config.googleMaps.key, 
+      key: '',
       address: req.body.address
     }
     request({

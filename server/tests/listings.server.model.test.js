@@ -1,7 +1,6 @@
 var should = require('should'), 
     mongoose = require('mongoose'), 
-    Listing = require('../models/listings.server.model'), 
-    config = require('../config/config');
+    Listing = require('../models/listings.server.model');
 
 var listing = {
   code: 'LBWEST',
@@ -14,7 +13,7 @@ var id;
 describe('Listing Schema Unit Tests', function() {
 
   before(function(done) {
-    mongoose.connect(config.db.uri);
+    mongoose.connect(process.env.MLAB);
     done();
   });
 
